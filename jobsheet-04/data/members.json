@@ -1,0 +1,6 @@
+[
+  {"member_no":"A001","name":"Siti Aminah","gender":"Female","address":"Malang","phone_no":"081234567890","email":"siti@example.com"},
+  {"member_no":"A002","name":"Budi Santoso","gender":"Male","address":"Batu","phone_no":"081345678901","email":"budi@example.com"},
+  {"member_no":"A003","name":"Rina Wulandari","gender":"Female","address":"Malang","phone_no":"081256789012","email":"rina@example.com"},
+  {"member_no":"A004","name":"Andi Pratama","gender":"Male","address":"Kepanjen","phone_no":"081367890123","email":"andi@example.com"}
+]

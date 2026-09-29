@@ -1,0 +1,12 @@
+[
+  {"title":"Laskar Pelangi","author":"Andrea Hirata","year":2005,"isbn":"978-979-306-279-2","stock":4,"category":"fiction"},
+  {"title":"Bumi Manusia","author":"Pramoedya Ananta Toer","year":1980,"isbn":"978-979-97312-0-2","stock":2,"category":"fiction"},
+  {"title":"Negeri 5 Menara","author":"Ahmad Fuadi","year":2009,"isbn":"978-979-224-329-7","stock":0,"category":"fiction"},
+  {"title":"Filosofi Teras","author":"Henry Manampiring","year":2018,"isbn":"978-602-291-443-8","stock":5,"category":"non-fiction"},
+  {"title":"Ronggeng Dukuh Paruk","author":"Ahmad Tohari","year":1982,"isbn":"978-979-407-132-7","stock":1,"category":"fiction"},
+  {"title":"Sang Pemimpi","author":"Andrea Hirata","year":2006,"isbn":"978-979-306-279-3","stock":3,"category":"fiction"},
+  {"title":"Cantik Itu Luka","author":"Eka Kurniawan","year":2002,"isbn":"978-602-03-0208-9","stock":2,"category":"fiction"},
+  {"title":"Pulang","author":"Leila S. Chudori","year":2012,"isbn":"978-979-22-8700-4","stock":0,"category":"fiction"},
+  {"title":"Atomic Habits","author":"James Clear","year":2018,"isbn":"978-073-521-129-2","stock":4,"category":"non-fiction"},
+  {"title":"The Design of Everyday Things","author":"Don Norman","year":2013,"isbn":"978-046-505-065-9","stock":2,"category":"reference"}
+]

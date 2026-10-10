@@ -1,41 +1,36 @@
 <?php
-
+$page_title = "Member List";
 require __DIR__ . '/../includes/connection.php';
-
-$daftarMember = $pdo->query("SELECT * FROM members ORDER BY id DESC")
-    ->fetchAll(PDO::FETCH_ASSOC);
-
+include __DIR__ . '/../includes/header.php';
+$flash = $_SESSION['flash'] ?? null;
+unset($_SESSION['flash']);
+$daftarMember = $pdo->query("SELECT * FROM members ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Member List</title>
-</head>
-<body>
-
+  <section>
     <h2>Member List</h2>
-
+    <?php if ($flash): ?>
+      <p class="flash flash-<?php echo htmlspecialchars($flash['type']); ?>"><?php echo htmlspecialchars($flash['pesan']); ?></p>
+    <?php endif; ?>
     <table border="1" cellpadding="8" cellspacing="0">
+      <thead>
+        <tr><th>Member ID</th><th>Name</th><th>Address</th><th>Phone</th></tr>
+      </thead>
+      <tbody>
+        <?php if (empty($daftarMember)): ?>
         <tr>
-            <th>ID</th>
-            <th>Member ID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
+          <td colspan="4">No member data yet. Please add one via the "Add Member" menu.</td>
         </tr>
-
-        <?php foreach ($daftarMember as $member) : ?>
+        <?php else: ?>
+          <?php foreach ($daftarMember as $member): ?>
         <tr>
-            <td><?php echo $member['id']; ?></td>
-            <td><?php echo $member['member_id']; ?></td>
-            <td><?php echo $member['name']; ?></td>
-            <td><?php echo $member['address']; ?></td>
-            <td><?php echo $member['phone']; ?></td>
+          <td><?php echo htmlspecialchars($member['member_id']); ?></td>
+          <td><?php echo htmlspecialchars($member['name']); ?></td>
+          <td><?php echo htmlspecialchars($member['address'] ?? '-'); ?></td>
+          <td><?php echo htmlspecialchars($member['phone'] ?? '-'); ?></td>
         </tr>
-        <?php endforeach; ?>
-
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </tbody>
     </table>
-
-</body>
-</html>
+  </section>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

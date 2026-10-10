@@ -1,33 +1,51 @@
 <?php
-
+session_start();
 require __DIR__ . '/../includes/connection.php';
 
-$title = trim($_POST['title'] ?? '');
-$author = trim($_POST['author'] ?? '');
-$year = trim($_POST['year'] ?? '');
+$title    = trim($_POST['title'] ?? '');
+$author   = trim($_POST['author'] ?? '');
+$year     = $_POST['year'] ?? '';
+$isbn     = trim($_POST['isbn'] ?? '');
+$stock    = $_POST['stock'] ?? '';
+$category = trim($_POST['category'] ?? '');
 
-if ($title === '' || $author === '' || !is_numeric($year)) {
-    die('Data tidak valid.');
+$errors = [];
+if ($title === '') {
+    $errors[] = "Title is required.";
+}
+if ($author === '') {
+    $errors[] = "Author is required.";
+}
+if (!is_numeric($year) || $year < 1900 || $year > 2026) {
+    $errors[] = "Year must be between 1900 and 2026.";
+}
+if (!is_numeric($stock) || $stock < 0) {
+    $errors[] = "Stock cannot be negative.";
+}
+if ($isbn !== '' && !preg_match('/^[0-9-]+$/', $isbn)) {
+    $errors[] = "ISBN may only contain digits and hyphens.";
+}
+
+if (!empty($errors)) {
+    $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];
+    header('Location: add.php');
+    exit;
 }
 
 $stmt = $pdo->prepare(
-    "INSERT INTO books(title, author, year)
-     VALUES (:title, :author, :year)
+    "INSERT INTO books(title, author, year, isbn, stock, category)
+     VALUES (:title, :author, :year, :isbn, :stock, :category)
      RETURNING id"
 );
-
 $stmt->execute([
-    'title' => $title,
-    'author' => $author,
-    'year' => (int) $year,
+    'title'    => $title,
+    'author'   => $author,
+    'year'     => (int) $year,
+    'isbn'     => $isbn !== '' ? $isbn : null,
+    'stock'    => (int) $stock,
+    'category' => $category !== '' ? $category : null,
 ]);
 
-session_start();
-
-$_SESSION['flash'] = [
-    'type' => 'success',
-    'pesan' => 'Book berhasil ditambahkan.'
-];
-
+$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Book added successfully.'];
 header('Location: list.php');
 exit;
